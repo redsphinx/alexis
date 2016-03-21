@@ -1,0 +1,20 @@
+% yelp train data
+@relation 'restaurant_objects_labels'
+
+@attribute obj1 numeric
+@attribute obj2 numeric
+@attribute obj3 numeric
+@attribute obj4 numeric
+@attribute obj5 numeric
+@attribute lbl0 {0,1}
+@attribute lbl1 {0,1}
+@attribute lbl2 {0,1}
+@attribute lbl3 {0,1}
+@attribute lbl4 {0,1}
+@attribute lbl5 {0,1}
+@attribute lbl6 {0,1}
+@attribute lbl7 {0,1}
+@attribute lbl8 {0,1}
+
+@data
+
