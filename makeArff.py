@@ -1,6 +1,6 @@
 import time
 
-#makes a unique pair train and text file
+# makes a unique pair train and text file
 def makeFile():
     pt1 = time.strftime("%d/%m/%Y")
     pt1 = ("_").join(pt1.split("/"))
@@ -20,8 +20,10 @@ def makeFile():
         #     for line in f:
         #         f1.write(line)
     return (traname,tesname)
+    pass
 
-#convert text file to dictionary
+
+# convert text file to dictionary
 def txt2dic(fname):
     fn = open(fname, "r")
     dic = {}
@@ -35,15 +37,10 @@ def txt2dic(fname):
         dic[key] = val
     fn.close()
     return dic
-
-p2b = txt2dic("txt/train_photo_to_biz_ids.txt")
-fn = makeFile("train")
-bla = open(fn, "a")
-train = txt2dic("txt/train.txt")
-traincl = txt2dic("txt/train_classified_noacc.txt")
+    pass
 
 
-def makeIt(p2b, traincl, bla, train, atNum):
+def makeTraArff(p2b, traincl, trabla, train, attNum):
     blank = [0,0,0,0,0,0,0,0,0]
     i=0
     for key1 in p2b.keys():
@@ -79,18 +76,52 @@ def makeIt(p2b, traincl, bla, train, atNum):
                 l3 += item + ","
             l3 += line3[-1]
 
-            print l3
+            # print l3
             # line3 = line3+labels+"\n"
             line3 = labels+l3+"\n"
-            print line3
+            # print line3
             #write line to bla
-            # bla.write(line3)
-            print(i)
+            trabla.write(line3)
+            print(str(i)+": "+line3)
     pass
+
+
+def makeTesArff(tesbla, testcl, attNum):
+    blank = [0,0,0,0,0,0,0,0,0]
+    blank = ','.join(map(str, blank))
+    blank = blank + ","
+
+    for i, line in enumerate(testcl):
+        #check for the num of attributes
+        line = line.split("\n")[0].split(",")
+        line = line[1:attNum+1]
+        l3 = ""
+        for item in line[:-1]:
+            l3 += item + ","
+        l3 += line[-1]
+
+        line = blank+l3+"\n"
+
+        tesbla.write(line)
+    tesbla.close()
+    testcl.close()
+    print "makeTesArff done"
+    pass
+
+# --- main
+p2b = txt2dic("txt/train_photo_to_biz_ids.txt")
+(trafn, tesfn) = makeFile()
+trabla = open(trafn, "a")
+tesbla = open(tesfn, "a")
+train = txt2dic("txt/train.txt")
+traincl = txt2dic("txt/train_classified_noacc.txt")
+testcl = open("txt/test_classified_noacc.txt", "r")
 
 attNum = 2
 if attNum >0 and attNum < 6:
-    makeIt(p2b, traincl, bla, train, attNum)
+    makeTraArff(p2b, traincl, trabla, train, attNum)
+    makeTesArff(tesbla, testcl, 3)
 
-#
-# bla.close()
+trabla.close()
+tesbla.close()
+testcl.close()
