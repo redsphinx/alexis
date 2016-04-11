@@ -8,13 +8,13 @@ def makeFile():
     pt2 = ("_").join(pt2.split(":"))
     traname = "pipe/" + "train" + "_" + pt1 + "_" + pt2 + ".txt"
     tesname = "pipe/" + "test" + "_" + pt1 + "_" + pt2 + ".txt"
-    open(traname, "w")
+    # open(traname, "w")
     open(tesname, "w")
-    traf = open(traname, "a")
+    # traf = open(traname, "a")
     tesf = open(tesname, "a")
     with open("txt/blaBU.txt") as f:
         for line in f:
-            traf.write(line)
+            # traf.write(line)
             tesf.write(line)
         # with open(name, "w") as f1:
         #     for line in f:
@@ -81,7 +81,7 @@ def makeTraArff(p2b, traincl, trabla, train, attNum):
             line3 = labels+l3+"\n"
             # print line3
             #write line to bla
-            trabla.write(line3)
+            # trabla.write(line3)
             print(str(i)+": "+line3)
     pass
 
@@ -119,8 +119,8 @@ testcl = open("txt/test_classified_noacc.txt", "r")
 
 attNum = 2
 if attNum >0 and attNum < 6:
-    makeTraArff(p2b, traincl, trabla, train, attNum)
-    makeTesArff(tesbla, testcl, 3)
+    # makeTraArff(p2b, traincl, trabla, train, attNum)
+    makeTesArff(tesbla, testcl, attNum)
 
 trabla.close()
 tesbla.close()
